@@ -16,4 +16,6 @@ gst-launch-1.0 filesrc location=/home/amither/output.raw ! rawvideoparse format=
 
 gst-launch-1.0 filesrc location=/home/amither/encode.h264 ! h264parse ! avdec_h264 ! xvimagesink
 
+sudo gst-launch-1.0 udpsrc port=4000 ! queue ! h264parse ! avdec_h264 ! xvimagesink
+
   ```
