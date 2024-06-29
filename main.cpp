@@ -51,6 +51,13 @@ void* mainloop(void* params)
 
     capture.attachBuffers(buffer);
 
+    encoder.setEncoderOption(V4L2_CID_MPEG_VIDEO_BITRATE_MODE, V4L2_MPEG_VIDEO_BITRATE_MODE_CBR);
+    encoder.setEncoderOption(V4L2_CID_MPEG_VIDEO_BITRATE_PEAK, videoParams->highBitrate);
+    encoder.setEncoderOption(V4L2_CID_MPEG_VIDEO_H264_ENTROPY_MODE, V4L2_MPEG_VIDEO_H264_ENTROPY_MODE_CAVLC);
+    encoder.setEncoderOption(V4L2_CID_MPEG_MFC51_VIDEO_RC_FIXED_TARGET_BIT, videoParams->highBitrate);
+
+
+    
     encoder.setEncoderOption(V4L2_CID_MPEG_VIDEO_BITRATE, videoParams->highBitrate);
     encoder.setEncoderOption(V4L2_CID_MPEG_VIDEO_H264_I_PERIOD, videoParams->fps);
     encoder.setEncoderOption(V4L2_CID_MPEG_VIDEO_H264_PROFILE, V4L2_MPEG_VIDEO_H264_PROFILE_CONSTRAINED_BASELINE);
@@ -62,14 +69,18 @@ void* mainloop(void* params)
     encoder.setupInputBuffer(videoParams->width, videoParams->height, V4L2_PIX_FMT_NV12);
     encoder.setupOutputBuffer(videoParams->width, videoParams->height);
 
-    encoder.setFrameRate(V4L2_BUF_TYPE_VIDEO_OUTPUT, 30);
-    encoder.setFrameRate(V4L2_BUF_TYPE_VIDEO_CAPTURE, 30);
+    // encoder.setFrameRate(V4L2_BUF_TYPE_VIDEO_OUTPUT, 30);
+    // encoder.setFrameRate(V4L2_BUF_TYPE_VIDEO_CAPTURE, 30);
 
     encoder.startStream();
 
     encoder.debug();
 
 
+    encoder1.setEncoderOption(V4L2_CID_MPEG_VIDEO_BITRATE_MODE, V4L2_MPEG_VIDEO_BITRATE_MODE_CBR);
+    encoder1.setEncoderOption(V4L2_CID_MPEG_VIDEO_BITRATE_PEAK, videoParams->lowBitrate);
+    encoder1.setEncoderOption(V4L2_CID_MPEG_VIDEO_H264_ENTROPY_MODE, V4L2_MPEG_VIDEO_H264_ENTROPY_MODE_CAVLC);
+    encoder1.setEncoderOption(V4L2_CID_MPEG_MFC51_VIDEO_RC_FIXED_TARGET_BIT, videoParams->lowBitrate);
     
     encoder1.setEncoderOption(V4L2_CID_MPEG_VIDEO_BITRATE, videoParams->lowBitrate);
     encoder1.setEncoderOption(V4L2_CID_MPEG_VIDEO_H264_I_PERIOD, videoParams->fps);
@@ -82,8 +93,8 @@ void* mainloop(void* params)
     encoder1.setupInputBuffer(videoParams->width, videoParams->height, V4L2_PIX_FMT_NV12);
     encoder1.setupOutputBuffer(videoParams->width, videoParams->height);
 
-    encoder1.setFrameRate(V4L2_BUF_TYPE_VIDEO_OUTPUT, 30);
-    encoder1.setFrameRate(V4L2_BUF_TYPE_VIDEO_CAPTURE, 30);
+    // encoder1.setFrameRate(V4L2_BUF_TYPE_VIDEO_OUTPUT, 30);
+    // encoder1.setFrameRate(V4L2_BUF_TYPE_VIDEO_CAPTURE, 30);
 
     encoder1.startStream();
 
@@ -93,7 +104,7 @@ void* mainloop(void* params)
 
 	capture.setFormat(videoParams->width, videoParams->height, V4L2_PIX_FMT_NV12);
 
-    capture.setFrameRate(V4L2_BUF_TYPE_VIDEO_CAPTURE, videoParams->framerate);
+    // capture.setFrameRate(V4L2_BUF_TYPE_VIDEO_CAPTURE, videoParams->framerate);
 
 	size = capture.requestBuffer();
 
