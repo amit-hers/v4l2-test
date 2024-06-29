@@ -76,7 +76,7 @@ void Capture::setFrameRate(enum v4l2_buf_type const type ,unsigned int framerate
 			(float)timeperframe.denominator / timeperframe.numerator);
 
 	rc = ioctl(fd, VIDIOC_G_PARM, &parm);
-	if (rc != 0)
+	if (rc == -1)
 		printf("Failed to get device streaming parameters\n");
 
 	if (!(*cap & V4L2_CAP_TIMEPERFRAME)) {

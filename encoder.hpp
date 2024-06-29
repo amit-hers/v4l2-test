@@ -44,9 +44,9 @@ private:
     // Allocate buffers
 
     sockaddr_in adderess;
-
-    VideoBuffer inputBuffer;
+    
     VideoBuffer outputBuffer;
+    VideoBuffer inputBuffer;
 };
 
 #endif //__ENCODER_hpp__
