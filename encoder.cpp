@@ -146,6 +146,7 @@ void Encoder::init(int width, int height, int bitrate, int fps, bool isSendEther
     meta.width = width;
     meta.size_bytes = width*height*1.5;
     meta.stride = width * 1.5;
+    meta.framerate = fps;
     meta.format = IMAGE_FORMAT_H264;
 
     startStream();
