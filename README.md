@@ -6,6 +6,9 @@ The application shows incorrect work of the bcm2835-codec encoder on some resolu
 # Build steps
 ```
 - sudo apt install libv4l-dev build-essential cmake
+- mkdir build
+- cd build
+- cmake ..
 - make
 ```
 
